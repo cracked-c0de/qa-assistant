@@ -67,7 +67,6 @@ Perfect for quick copy-paste into bug tracking systems.
 | Toggle Overlay | Alt + Shift + O | Enable / disable HUD |
 | Toggle Highlight | Alt + Shift + H | Enable element highlight mode |
 | Copy QA Context | Alt + Shift + C | Copy full QA context to clipboard |
-| Screenshot | Alt + Shift + S | Take a viewport screenshot |
 | Clear Highlights | Esc | Remove all locked highlights |
 
 ---
