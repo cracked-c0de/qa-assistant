@@ -56,7 +56,6 @@ Perfect for quick copy-paste into bug tracking systems.
 ### 📸 One-Click Screenshot
 - Capture visible viewport
 - Save directly to the `Downloads` folder
-- Triggered via keyboard shortcut
 
 ---
 
