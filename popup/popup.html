@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>QA Assistant</title>
+    <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body class="popup">
+
+    <header class="header">
+        <div class="title">QA Assistant <span class="subtitle">| Manual QA Toolkit</span></div>
+    </header>
+
+    <section class="card">
+        <div class="row">
+            <div class="label">
+                Overlay HUD
+                <span class="hint" title="Shows page, browser, viewport and QA context">?</span>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div id="status" class="status disabled">Disabled</div>
+    </section>
+
+    <section class="card">
+        <div class="row" style="margin-bottom: 8px;">
+            <div class="label">
+                OS Version
+                <span class="hint" title="Manually select OS version for context report">?</span>
+            </div>
+        </div>
+
+        <select id="os-select" class="select-field" style="margin-bottom: 10px;">
+            <option value="Windows 11">Windows 11</option>
+            <option value="Windows 10">Windows 10</option>
+            <option value="macOS">macOS</option>
+            <option value="Linux">Linux</option>
+            <option value="Windows">Windows (Other)</option>
+            <option value="Unknown" selected>-- Auto Detected / N/A --</option>
+        </select>
+
+        <div class="row" style="margin-bottom: 6px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;">
+            <div class="label" style="font-size: 11px; opacity: 0.7;">
+                Custom Version
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" id="custom-os-input" class="select-field" placeholder="Example: Ubuntu 22.04"
+                style="flex-grow: 1;">
+            <button id="use-custom-btn" class="action-btn" style="width: 60px; background: #6c757d; color: #fff;"
+                disabled>
+                Use
+            </button>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="row">
+            <div class="label">Clear Session Data</div>
+        </div>
+        <button id="clear-cookies-btn" class="action-btn clear-btn">
+            Clear Cookies & Local Storage
+        </button>
+        <div class="note">
+            Clears session for the current tab's domain and reloads the page.
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="row">
+            <div class="label">
+                Highlight Mode
+                <span class="hint" title="Inspect elements, lock selectors and freeze scroll">?</span>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="highlightToggle" disabled />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="note">
+            Hotkey: <b>Alt+Shift+H</b> — toggle; Click — lock/unlock; ESC — clear all
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="developer-info" style="font-size: 10px; text-align: center; margin-bottom: 6px; opacity: 0.8;">
+            Developed by
+            <a href="https://github.com/cracked-c0de" target="_blank"
+                style="color: #00ffcc; text-decoration: none; font-weight: 700;">
+                cracked-c0de
+            </a>
+        </div>
+
+        <div class="hotkeys">
+            <span>Alt+Shift+H - Highlight</span>
+            <span>Alt+Shift+O - Overlay</span>
+            <span>Alt+Shift+C - Copy</span>
+        </div>
+    </footer>
+
+    <script src="popup.js"></script>
+</body>
+
+</html> 

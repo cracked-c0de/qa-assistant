@@ -1,0 +1,209 @@
+/* -------------------------------------- */
+/* 1. BASE AND FONT IMPORTS */
+/* -------------------------------------- */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/JetBrainsMono-Bold.woff2') format('woff2');
+}
+
+body.popup {
+    width: 280px;
+    background: radial-gradient(circle at top, #0a0f14, #05080c);
+    color: #e5e7eb;
+    font-family: "JetBrains Mono", monospace;
+    padding: 12px;
+}
+
+/* -------------------------------------- */
+/* 2. LAYOUT AND TEXT */
+/* -------------------------------------- */
+
+.header {
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #00ffcc;
+}
+
+.subtitle {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 255, 204, 0.15);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hint {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(0, 255, 204, 0.15);
+    color: #00ffcc;
+    font-size: 10px;
+    cursor: help;
+}
+
+.status {
+    margin-top: 6px;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.status.enabled {
+    color: #00ffcc;
+}
+
+.status.disabled {
+    color: #888;
+}
+
+.note {
+    font-size: 9px;
+    opacity: 0.6;
+    margin-top: 4px;
+    line-height: 1.3;
+}
+
+.footer {
+    margin-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 4px;
+}
+
+.hotkeys {
+    font-size: 9px;
+    opacity: 0.7;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #00ffcc;
+}
+
+/* -------------------------------------- */
+/* 3. INPUTS (SELECT & CUSTOM INPUT) */
+/* -------------------------------------- */
+
+.select-field {
+    width: 100%;
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #00ffcc;
+    font-family: monospace;
+    cursor: pointer;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="%2300ffcc" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592c.859 0 1.319 1.013.753 1.658l-4.796 5.482a1 1 0 0 1-1.506 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    height: 32px;
+}
+
+.select-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.4);
+}
+
+.select-field option {
+    background: #0a0f14;
+    color: #e5e7eb;
+}
+
+/* Переопределяем стили для Input, чтобы он работал как текстовое поле */
+#custom-os-input {
+    cursor: text;
+    appearance: auto;
+    background-image: none;
+    color: #00ffcc;
+}
+
+/* Стилизация placeholder */
+#custom-os-input::placeholder {
+    color: rgba(0, 255, 204, 0.5);
+    opacity: 1;
+}
+
+/* -------------------------------------- */
+/* 4. ACTION BUTTONS */
+/* -------------------------------------- */
+
+.action-btn {
+    margin-top: 0;
+    width: 100%;
+    padding: 0 8px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s, opacity 0.2s;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.action-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.clear-btn {
+    background: #dc3545;
+    color: #fff;
+    margin-top: 8px;
+}
+
+.clear-btn:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.footer a {
+    color: #00ffcc;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: #4affd9;
+    text-decoration: underline;
+}
