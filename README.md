@@ -4,6 +4,7 @@
   <a href="https://github.com/cracked-c0de/qa-assistant">
     <img src="https://img.shields.io/badge/Status-Active-brightgreen" alt="Status: Active">
   </a>
+  
   <a href="https://github.com/cracked-c0de">
     <img src="https://img.shields.io/badge/Developed%20by-cracked--c0de-00ffcc?style=flat&logo=github" alt="Developed by cracked-c0de">
   </a>
