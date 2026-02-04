@@ -206,3 +206,8 @@ function sendHighlightState(enabled) {
         }
     });
 }
+
+// Open Style Page
+document.getElementById('open-style-page')?.addEventListener('click', () => {
+    chrome.runtime.openOptionsPage();
+});

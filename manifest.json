@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "QA Assistant",
     "description": "Manual QA helper with highlight, selectors and screenshots",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "icons": {
         "16": "assets/16x16.png",
         "48": "assets/48x48.png",
@@ -24,6 +24,7 @@
     "host_permissions": [
         "<all_urls>"
     ],
+    "options_page": "style/style.html",
     "content_scripts": [
         {
             "matches": [
@@ -36,5 +37,13 @@
     ],
     "background": {
         "service_worker": "background.js"
+    },
+    "commands": {
+        "take_screenshot": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y"
+            },
+            "description": "Take screenshot"
+        }
     }
 }

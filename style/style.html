@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Style Rules</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="dev-theme">
+
+    <div class="app-container">
+        <header class="header">
+            <span class="brand">UI Styler</span>
+            <span class="separator">|</span>
+            <span class="sub-brand">CSS Overrides</span>
+        </header>
+
+        <main class="content-scroll">
+
+            <section class="card">
+                <div class="card-header row-between">
+                    <div class="header-left">
+                        <span class="card-title">Target Tab</span>
+                        <span class="icon-help" data-guide="target-tab">?</span>
+                    </div>
+
+                    <button class="icon-btn" id="refreshTabs" title="Refresh tabs list">
+                        ⟳
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="custom-dropdown" id="tabDropdown">
+                        <input type="hidden" id="targetTabValue" value="current">
+
+                        <div class="dropdown-trigger">
+                            <span class="selected-text">Current Tab</span>
+                            <svg class="arrow-icon" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <div class="dropdown-options">
+                            <div class="option active" data-value="current">
+                                <span class="tag">ACT</span> Current Active Tab
+                            </div>
+                            <div class="option" data-value="all">
+                                <span class="tag">ALL</span> All System Tabs
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-title">Target Element</span>
+                    <span class="icon-help" data-guide="target-element">?</span>
+                </div>
+                <div class="card-body">
+                    <div class="custom-dropdown" id="targetDropdown">
+                        <input type="hidden" id="targetSelectorValue" value="p">
+
+                        <div class="dropdown-trigger">
+                            <span class="selected-text">Paragraph</span>
+                            <svg class="arrow-icon" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <div class="dropdown-options">
+                            <div class="option" data-value="h1"><span class="tag">H1</span> Heading 1</div>
+                            <div class="option" data-value="h2"><span class="tag">H2</span> Heading 2</div>
+                            <div class="option" data-value="h3"><span class="tag">H3</span> Heading 3</div>
+                            <div class="option" data-value="h4"><span class="tag">H4</span> Heading 4</div>
+                            <div class="option" data-value="h5"><span class="tag">H5</span> Heading 5</div>
+                            <div class="option" data-value="h6"><span class="tag">H6</span> Heading 6</div>
+                            <div class="option active" data-value="p"><span class="tag">P</span> Paragraph</div>
+                            <div class="option" data-value="span"><span class="tag">SPAN</span> Span Element</div>
+                            <div class="option" data-value="a"><span class="tag">A</span> Link Anchor</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header row-between">
+                    <div class="header-left">
+                        <span class="card-title">Custom Selector</span>
+                        <span class="icon-help" data-guide="custom-selector">?</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="useCustomSelector">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="card-body">
+                    <input id="customSelector" type="text" class="input-dark muted" placeholder=".classname > tag"
+                        disabled />
+                    <div class="helper-text">Enable toggle to manually type CSS selector</div>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-title">Font Properties</span>
+                    <span class="icon-help" data-guide="font-properties">?</span>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="mini-label">CDN URL</label>
+                        <input id="fontCdn" type="text" class="input-dark"
+                            placeholder="https://fonts.googleapis.com/..." />
+                    </div>
+
+                    <div class="row-2-col">
+                        <div class="form-group">
+                            <label class="mini-label">Size (px)</label>
+                            <input id="fontSize" type="number" class="input-dark" value="16" />
+                        </div>
+                        <div class="form-group">
+                            <label class="mini-label">Color</label>
+                            <div class="color-picker-wrapper">
+                                <input id="fontColor" type="color" class="color-input" value="#00ffcc" />
+                                <span class="color-hex">#00FFCC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-title">Live Preview</span>
+                    <span class="icon-help" data-guide="preview">?</span>
+                </div>
+                <div class="card-body">
+                    <div id="previewText" class="preview-box">
+                        The quick brown fox jumps over the lazy dog
+                    </div>
+                </div>
+            </section>
+
+            <section class="card no-border bg-transparent">
+                <button id="applyStyles" class="btn-outline-cyan">
+                    Apply Style Rules
+                </button>
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <div class="dev-by">Developed by <span class="accent-text">cracked-c0de</span></div>
+            <!-- <div class="shortcuts">
+                <span><span class="key">Alt</span>+<span class="key">S</span> - Apply</span>
+                <span><span class="key">Esc</span> - Reset</span>
+            </div> -->
+        </footer>
+    </div>
+
+    <script src="style.js"></script>
+</body>
+
+</html>

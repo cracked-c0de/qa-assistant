@@ -1,0 +1,567 @@
+:root {
+    /* Цвета из скриншота */
+    --bg-app: #05080a;
+    /* Почти черный фон */
+    --bg-card: #0b1116;
+    /* Темно-синий/серый фон карточек */
+    --bg-input: #06090c;
+    /* Фон инпутов */
+
+    --border-card: #162a35;
+    /* Темно-бирюзовая рамка (еле заметная) */
+    --border-input: #21303b;
+
+    --text-main: #e1e6eb;
+    --text-muted: #5f7485;
+
+    --accent: #00ffcc;
+    /* Яркий Cyan */
+    --accent-dim: rgba(0, 255, 204, 0.1);
+
+    --font-main: 'JetBrains Mono', monospace;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Контейнер как на скрине (узкая панель) */
+.app-container {
+    width: 80%;
+    background: var(--bg-app);
+    border: 1px solid #1e2933;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Header --- */
+.header {
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    border-bottom: 1px solid var(--border-card);
+}
+
+.brand {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.separator {
+    color: var(--text-muted);
+    margin: 0 6px;
+}
+
+.sub-brand {
+    color: var(--text-muted);
+}
+
+/* --- Content --- */
+.content-scroll {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+/* --- Card Style --- */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 4px;
+}
+
+.card.no-border {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-header.row-between {
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: 0.5px;
+}
+
+.icon-help {
+    margin-left: 6px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: bold;
+    cursor: help;
+    opacity: 0.8;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.helper-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.mini-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* --- Inputs --- */
+.input-dark {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--accent);
+    /* Текст в инпутах цвета акцента как на скрине */
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.input-dark:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 5px rgba(0, 255, 204, 0.2);
+}
+
+.input-dark.muted {
+    color: var(--text-muted);
+}
+
+.input-dark:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Убираем стрелки для Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Убираем стрелки для Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: #7fffe1;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.icon-btn:hover {
+    background: rgba(0, 255, 204, 0.12);
+}
+
+.icon-btn:active {
+    transform: rotate(90deg);
+}
+
+
+/* --- Custom Dropdown Container --- */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    font-family: var(--font-mono);
+    /* Используем моноширинный шрифт */
+    user-select: none;
+}
+
+/* --- Trigger (Кнопка) --- */
+.dropdown-trigger {
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-trigger:hover {
+    border-color: var(--text-muted);
+}
+
+/* Состояние "Открыто" */
+.custom-dropdown.open .dropdown-trigger {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-dim);
+}
+
+.arrow-icon {
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.custom-dropdown.open .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* --- Menu (Выпадающий список) --- */
+.dropdown-options {
+    position: absolute;
+    top: calc(100% + 6px);
+    /* Отступ сверху */
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 100;
+
+    /* Анимация скрытия */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Анимация появления */
+.custom-dropdown.open .dropdown-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- Option Items --- */
+.option {
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    /* Линия слева */
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.option:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+}
+
+.option.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-left-color: var(--accent);
+}
+
+/* Стильные теги внутри опций (H1, P, DIV) */
+.tag {
+    display: inline-block;
+    padding: 2px 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 24px;
+    text-align: center;
+}
+
+.option.active .tag {
+    background: var(--accent);
+    color: #000;
+}
+
+/* Select arrow custom */
+select.input-dark {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='%2300ffcc'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+
+/* --- Toggle Switch (Checkbox) --- */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #21303b;
+    transition: .2s;
+    border-radius: 4px;
+    /* Квадратные края как на скрине */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #888;
+    transition: .2s;
+    border-radius: 2px;
+}
+
+input:checked+.slider {
+    background-color: var(--bg-input);
+    border: 1px solid var(--accent);
+}
+
+input:checked+.slider:before {
+    transform: translateX(16px);
+    background-color: var(--accent);
+}
+
+/* --- Color Picker --- */
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.color-input {
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.color-input::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-input::-webkit-color-swatch {
+    border: none;
+    border-radius: 2px;
+}
+
+.color-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    margin-left: 8px;
+}
+
+/* --- Preview Box --- */
+.preview-box {
+    padding: 10px;
+    border: 1px dashed #334;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* --- Buttons --- */
+.btn-outline-cyan {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: capitalize;
+}
+
+.btn-outline-cyan:hover {
+    background: var(--accent-dim);
+    box-shadow: 0 0 10px var(--accent-dim);
+}
+
+.btn-outline-cyan:active {
+    transform: translateY(1px);
+}
+
+.row-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* --- Footer --- */
+.footer {
+    margin-top: auto;
+    padding: 12px 16px;
+    text-align: center;
+    border-top: 1px solid var(--border-card);
+    background: var(--bg-app);
+}
+
+.dev-by {
+    font-size: 11px;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.accent-text {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.shortcuts {
+    font-size: 10px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.key {
+    color: #fff;
+}
+
+.guide-tooltip {
+    position: fixed;
+    max-width: 260px;
+
+    background: #0e141b;
+    color: #e6e6e6;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 10px 12px;
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    z-index: 9999;
+}
+
+.icon-help {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.icon-help:hover {
+    opacity: 1;
+    color: #00ffcc;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+
+    background: #0e141b;
+    color: #e6e6e6;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+}
+
+/* visible */
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* types */
+.toast.error {
+    border-color: rgba(255, 80, 80, 0.6);
+    color: #ff6b6b;
+}
+
+.toast.warning {
+    border-color: rgba(255, 193, 7, 0.6);
+    color: #ffc107;
+}
+
+.toast.success {
+    border-color: rgba(0, 255, 204, 0.6);
+    color: #00ffcc;
+}
+
+.custom-dropdown.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    filter: grayscale(0.6);
+}

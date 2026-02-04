@@ -318,6 +318,8 @@ function findLockedTarget(el) {
 
 function createLockedTooltip(el) {
     const tip = document.createElement("div");
+    tip.className = 'qa-locked-tooltip';
+
     tip.style.cssText = `
         position: fixed;
         background: #111;
@@ -328,16 +330,33 @@ function createLockedTooltip(el) {
         border-radius: 6px;
         z-index: 1000001;
         max-width: 320px;
-        pointer-events: none;
+        pointer-events: auto;
     `;
+
+    const selector = getCssSelector(el);
 
     tip.innerHTML = `
         <div><b>${el.tagName.toLowerCase()}</b></div>
-        <div>CSS: ${getCssSelector(el)}</div>
-        <div style="opacity:.6">Locked</div>
+        <div style="word-break: break-all;">CSS: ${selector}</div>
+        <button class="qa-copy-selector-btn">Copy for UI Styler</button>
     `;
 
     document.body.appendChild(tip);
+
+    const copyBtn = tip.querySelector('.qa-copy-selector-btn');
+
+    copyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        navigator.clipboard.writeText(selector);
+
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => {
+            copyBtn.textContent = 'Copy for UI Styler';
+        }, 1200);
+    });
+
     return tip;
 }
 
@@ -432,6 +451,10 @@ function onMouseMove(e) {
 }
 
 function onClick(e) {
+    // ⛔ игнорируем клики по locked tooltip
+    if (e.target.closest('.qa-locked-tooltip')) {
+        return;
+    }
     if (!highlightEnabled) return;
     if (overlay?.contains(e.target)) return;
 
@@ -631,6 +654,54 @@ chrome.runtime.onMessage.addListener((msg) => {
         }
     }
 });
+
+/* ================= STYLE RULES ================= */
+
+function loadFontFromCDN(cdn) {
+    if (!cdn) return;
+    if (document.querySelector(`link[href="${cdn}"]`)) return;
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = cdn;
+    document.head.appendChild(link);
+}
+
+function extractFontFamilyFromCDN(cdn) {
+    const match = cdn?.match(/family=([^:&]+)/);
+    return match ? decodeURIComponent(match[1]).replace(/\+/g, " ") : null;
+}
+
+function applySelectorStyles(selector, rules) {
+    const elements = document.querySelectorAll(selector);
+    if (!elements.length) return;
+
+    if (rules.cdn) loadFontFromCDN(rules.cdn);
+
+    const fontFamily = extractFontFamilyFromCDN(rules.cdn);
+
+    elements.forEach(el => {
+        if (fontFamily) {
+            el.style.fontFamily = `'${fontFamily}', sans-serif`;
+        }
+        if (rules.size) {
+            el.style.fontSize = `${rules.size}px`;
+        }
+        if (rules.color) {
+            el.style.color = rules.color;
+        }
+    });
+}
+
+/* ================= MESSAGE HANDLER EXTENSION ================= */
+
+chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.type === "APPLY_STYLE_RULES") {
+        applySelectorStyles(msg.selector, msg.rules);
+    }
+});
+
+/* ================= INITIALIZATION ================= */
 
 // Инициализация при загрузке content-скрипта
 chrome.storage.local.get(["enabled", "highlight", "qa_os_version"], (res) => {

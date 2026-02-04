@@ -147,8 +147,56 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return true; // <-- Асинхронный ответ
         }
 
+        /* ================= STYLE RULES ================= */
+        case "SET_STYLE_RULES": {
+            const { tabId, selector, rules } = message;
+
+            if (!tabId || !selector || !rules) {
+                console.warn("Invalid STYLE RULES payload", message);
+                return;
+            }
+
+            // 👉 отправляем ТОЛЬКО в выбранную вкладку
+            chrome.tabs.sendMessage(tabId, {
+                type: "APPLY_STYLE_RULES",
+                selector,
+                rules
+            }).catch(() => {
+                console.warn("Failed to apply style rules to tab", tabId);
+            });
+
+            break;
+        }
+
         default:
             // Если сообщение не требует асинхронного ответа, просто выходим
             break;
     }
+});
+
+// ==================== COMMANDS ====================
+// Screenshot via keyboard shortcut
+chrome.commands.onCommand.addListener((command) => {
+    if (command !== "take_screenshot") return;
+
+    chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+        if (!tab?.windowId || !tab?.url) return;
+
+        chrome.tabs.captureVisibleTab(
+            tab.windowId,
+            { format: "png" },
+            (dataUrl) => {
+                if (chrome.runtime.lastError || !dataUrl) return;
+
+                const ts = new Date().toISOString().replace(/[:.]/g, "-");
+                const host = new URL(tab.url).hostname;
+
+                chrome.downloads.download({
+                    url: dataUrl,
+                    filename: `qa-${host}-${ts}.png`,
+                    saveAs: false
+                });
+            }
+        );
+    });
 });
